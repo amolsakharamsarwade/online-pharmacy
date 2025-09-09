@@ -1,37 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  errorMessage!: string;
+export class LoginComponent {
+  loginForm: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
-  }
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
-    const {email, password} = this.loginForm.value;
-    this.authService.login(email, password).subscribe(
-      (res: any): void => {
-        // Redirect or set user session here
-      },
-      (err: any): void => {
-        this.errorMessage = 'Invalid login credentials';
+    const { username, password } = this.loginForm.value;
+    const success = this.authService.login(username, password);
+
+    if (success) {
+      const role = this.authService.getUserRole();
+      if (role === 'admin') {
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/customer']);
       }
-    );
+    } else {
+      this.errorMessage = 'Invalid username or password';
+    }
   }
 }

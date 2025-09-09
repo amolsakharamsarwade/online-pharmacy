@@ -18,6 +18,9 @@ import { FilterPipe } from './pipes/filter.pipe';
     HighlightDirective,
     FilterPipe
   ],
+  exports: [
+    NavbarComponent
+  ],
   imports: [
     CommonModule
   ]

@@ -1,39 +1,51 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {User} from "../models/user.model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:8080';
-  private userKey: string = 'currentUser';
+  private currentUserKey = 'online-pharmacy-user';
 
-  constructor(private http: HttpClient) {
+  constructor(private router: Router) {}
+
+  // Mock Login (replace with API later)
+  login(username: string, password: string): boolean {
+    const mockUsers: User[] = [
+      new User({ id: 1, username: 'admin', email: 'admin@pharmacy.com', role: 'admin', token: 'admin-token' }),
+      new User({ id: 2, username: 'customer', email: 'customer@pharmacy.com', role: 'customer', token: 'customer-token' })
+    ];
+
+    const user = mockUsers.find(u => u.username === username && password === '1234');
+    if (user) {
+      localStorage.setItem(this.currentUserKey, JSON.stringify(user));
+      return true;
+    }
+    return false;
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<AuthService>(`${this.apiUrl}/login`, {email, password});
+  register(user: User): void {
+    // For demo, just save to localStorage
+    localStorage.setItem(this.currentUserKey, JSON.stringify(user));
   }
 
   logout(): void {
-    localStorage.removeItem(this.userKey);
+    localStorage.removeItem(this.currentUserKey);
+    this.router.navigate(['/auth/login']);
   }
 
-  setSession(user: any): void {
-    localStorage.setItem(this.userKey, JSON.stringify(user));
+  getCurrentUser(): User | null {
+    const userData = localStorage.getItem(this.currentUserKey);
+    return userData ? new User(JSON.parse(userData)) : null;
   }
 
-  getSession(): any {
-    return JSON.parse(localStorage.getItem(this.userKey) || '{}');
+  isLoggedIn(): boolean {
+    return !!this.getCurrentUser();
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getSession().token;
-  }
-
-  getUserRole(): string {
-    const user = this.getSession();
-    return user?.role || '';
+  getUserRole(): 'admin' | 'customer' | null {
+    const user = this.getCurrentUser();
+    return user ? user.role : null;
   }
 }

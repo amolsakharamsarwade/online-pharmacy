@@ -1,1 +1,32 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <ul>
+    <!-- Show links for ALL logged-in users -->
+    <li *ngIf="isLoggedIn()"><a routerLink="/">Home</a></li>
+
+    <!-- Show Customer links -->
+    <ng-container *ngIf="isCustomer()">
+      <li><a routerLink="/customer/products">Products</a></li>
+      <li><a routerLink="/customer/cart">Cart</a></li>
+      <li><a routerLink="/customer/orders">Orders</a></li>
+    </ng-container>
+
+    <!-- Show Admin links -->
+    <ng-container *ngIf="isAdmin()">
+      <li><a routerLink="/admin/products">Manage Products</a></li>
+      <li><a routerLink="/admin/orders">Manage Orders</a></li>
+      <li><a routerLink="/admin/customers">Manage Customers</a></li>
+    </ng-container>
+
+    <!-- Right-aligned section -->
+    <span class="spacer"></span>
+
+    <!-- Login/Register if NOT logged in -->
+    <li *ngIf="!isLoggedIn()"><a routerLink="/auth/login">Login</a></li>
+    <li *ngIf="!isLoggedIn()"><a routerLink="/auth/register">Register</a></li>
+
+    <!-- Logout if logged in -->
+    <li *ngIf="isLoggedIn()">
+      <button (click)="logout()">Logout</button>
+    </li>
+  </ul>
+</nav>
