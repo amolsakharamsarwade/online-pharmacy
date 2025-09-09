@@ -1,1 +1,153 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$online-pharmacy-primary: mat.define-palette(mat.$indigo-palette);
+$online-pharmacy-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$online-pharmacy-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$online-pharmacy-theme: mat.define-light-theme((
+  color: (
+    primary: $online-pharmacy-primary,
+    accent: $online-pharmacy-accent,
+    warn: $online-pharmacy-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($online-pharmacy-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*@use '@angular/material' as mat;
+
+!*------------------------------
+  1. Define Color Palettes
+------------------------------*!
+
+!* Light Theme Palettes *!
+$primary-light: mat.define-palette(mat.$blue-palette, 600, 100, 900);
+$accent-light: mat.define-palette(mat.$green-palette, A400, A100, A700);
+$warn-light: mat.define-palette(mat.$red-palette);
+$background-light: (
+  background: mat.define-palette(mat.$grey-palette, 50),
+  card: mat.define-palette(mat.$grey-palette, 100)
+);
+
+!* Dark Theme Palettes *!
+$primary-dark: mat.define-palette(mat.$blue-palette, 200, 100, 400);
+$accent-dark: mat.define-palette(mat.$green-palette, A200, A100, A400);
+$warn-dark: mat.define-palette(mat.$red-palette);
+$background-dark: (
+  background: mat.define-palette(mat.$grey-palette, 900),
+  card: mat.define-palette(mat.$grey-palette, 800)
+);
+
+!*------------------------------
+  2. Typography Config
+------------------------------*!
+$typography-config: mat.define-typography-config((
+  font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  headline1: mat.define-typography-level(96px, 96px, 300),
+  headline2: mat.define-typography-level(60px, 60px, 300),
+  headline3: mat.define-typography-level(48px, 48px, 400),
+  headline4: mat.define-typography-level(34px, 48px, 400),
+  headline5: mat.define-typography-level(24px, 36px, 400),
+  headline6: mat.define-typography-level(20px, 32px, 500),
+  body1: mat.define-typography-level(16px, 24px, 400),
+  body2: mat.define-typography-level(14px, 20px, 400),
+  button: mat.define-typography-level(14px, 14px, 500, uppercase)
+));
+
+!*------------------------------
+  3. Define Themes
+------------------------------*!
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-light,
+    accent: $accent-light,
+    warn: $warn-light,
+    background: $background-light
+  ),
+  typography: $typography-config,
+  density: 0
+));
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-dark,
+    accent: $accent-dark,
+    warn: $warn-dark,
+    background: $background-dark
+  ),
+  typography: $typography-config,
+  density: 0
+));
+
+!*------------------------------
+  4. Include Core & Themes
+------------------------------*!
+@include mat.core();
+@include mat.all-component-themes($light-theme);
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+}
+
+!*------------------------------
+  5. Global Styles
+------------------------------*!
+body {
+  font-family: 'Roboto, "Helvetica Neue", sans-serif';
+  background-color: mat.get-color-from-palette($background-light, background);
+  margin: 0;
+  color: mat.get-color-from-palette($background-light, card);
+}
+
+a {
+  text-decoration: none;
+  color: mat.get-color-from-palette($primary-light);
+}
+
+!*------------------------------
+  6. Automatic Dark Mode Detection
+------------------------------*!
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: mat.get-color-from-palette($background-dark, background);
+    color: mat.get-color-from-palette($background-dark, card);
+  }
+
+  a {
+    color: mat.get-color-from-palette($primary-dark);
+  }
+
+  !* Apply dark theme styles globally *!
+  @include mat.all-component-themes($dark-theme);
+}
+
+!*------------------------------
+  7. Utility Class for Toggle
+------------------------------*!
+.dark-theme-toggle {
+  @extend .dark-theme;
+}*/
