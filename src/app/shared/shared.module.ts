@@ -6,6 +6,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { FilterPipe } from './pipes/filter.pipe';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { TermsComponent } from './pages/terms/terms.component';
+import {RouterLink} from "@angular/router";
 
 
 
@@ -16,13 +19,18 @@ import { FilterPipe } from './pipes/filter.pipe';
     NavbarComponent,
     NotificationComponent,
     HighlightDirective,
-    FilterPipe
+    FilterPipe,
+    PrivacyComponent,
+    TermsComponent
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ]
 })
 export class SharedModule { }

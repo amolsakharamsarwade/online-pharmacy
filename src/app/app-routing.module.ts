@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PrivacyComponent} from "./shared/pages/privacy/privacy.component";
+import {TermsComponent} from "./shared/pages/terms/terms.component";
 
 const routes: Routes = [{
   path: 'auth',
@@ -13,6 +15,12 @@ const routes: Routes = [{
   path: 'admin',
   loadChildren: () =>
     import('./admin/admin.module').then((m) => m.AdminModule),
+}, {
+  path: 'privacy',
+  component: PrivacyComponent,
+}, {
+  path: 'terms',
+  component: TermsComponent,
 }, {
   path: '',
   redirectTo: '/auth/login',
