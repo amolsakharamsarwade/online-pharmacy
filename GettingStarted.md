@@ -43,7 +43,11 @@
 
 `ng g component auth/register`
 
-`ng g guard auth/auth`
+`ng g guard auth/guards/auth`
+
+`ng g guard auth/guards/home-redirect`
+
+`ng g component shared/components/home-redirect-placeholder --skip-tests --inline-template --inline-style`
 
 ## 6️⃣ Create Customer Module & Components
 

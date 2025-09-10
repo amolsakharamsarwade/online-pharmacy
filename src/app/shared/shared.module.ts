@@ -9,6 +9,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import {RouterLink} from "@angular/router";
+import { HomeRedirectPlaceholderComponent } from './components/home-redirect-placeholder/home-redirect-placeholder.component';
 
 
 
@@ -21,12 +22,14 @@ import {RouterLink} from "@angular/router";
     HighlightDirective,
     FilterPipe,
     PrivacyComponent,
-    TermsComponent
+    TermsComponent,
+    HomeRedirectPlaceholderComponent
   ],
   exports: [
     NavbarComponent,
     HeaderComponent,
     FooterComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,

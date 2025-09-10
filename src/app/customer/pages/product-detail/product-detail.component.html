@@ -1,1 +1,20 @@
-<p>product-detail works!</p>
+<div class="product-detail-container">
+  <div class="product-detail-card">
+    <!-- Left: Product Image -->
+    <div class="product-image">
+      <img [src]="product?.imageUrl" alt="{{product?.name}}" />
+    </div>
+
+    <!-- Right: Product Details -->
+    <div class="product-info">
+      <h1 class="product-name">{{ product?.name }}</h1>
+      <p class="product-category">Category: {{ product?.category }}</p>
+      <p class="product-price">₹ {{ product?.price }}</p>
+      <p class="product-description">{{ product?.description }}</p>
+
+      <div class="product-actions">
+        <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {User} from "../../models/user.model";
@@ -8,15 +8,21 @@ import {User} from "../../models/user.model";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   currentUser: User | null = null;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.currentUser = this.authService.getCurrentUser();
+    //this.currentUser = this.authService.getCurrentUser();
+  }
+
+  ngOnInit() {
+    this.authService.getCurrentUserObservable().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+    return !!this.currentUser;
   }
 
   isAdmin(): boolean {

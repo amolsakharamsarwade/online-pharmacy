@@ -2,6 +2,10 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PrivacyComponent} from "./shared/pages/privacy/privacy.component";
 import {TermsComponent} from "./shared/pages/terms/terms.component";
+import {HomeRedirectGuard} from "./auth/guards/home-redirect.guard";
+import {
+  HomeRedirectPlaceholderComponent
+} from "./shared/components/home-redirect-placeholder/home-redirect-placeholder.component";
 
 const routes: Routes = [{
   path: 'auth',
@@ -23,8 +27,8 @@ const routes: Routes = [{
   component: TermsComponent,
 }, {
   path: '',
-  redirectTo: '/auth/login',
-  pathMatch: 'full',
+  component: HomeRedirectPlaceholderComponent,
+  canActivate: [HomeRedirectGuard],
 }, {
   path: '**',
   redirectTo: '/auth/login',
