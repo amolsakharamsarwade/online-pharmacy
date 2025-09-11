@@ -1,6 +1,21 @@
-<header class="app-header">
-  <div class="logo">
-    <img src="assets/images/logo.jpg" alt="Online Pharmacy Logo" />
+<header class="app-header d-flex justify-content-between align-items-center p-2">
+  <div class="logo d-flex align-items-center">
+    <img src="assets/images/logo.jpg" alt="Online Pharmacy Logo" class="me-2" style="height: 50px;" />
     <h1>Online Pharmacy</h1>
   </div>
+
+  <nav class="nav-links d-flex align-items-center nav-links">
+    <a routerLink="/customer" class="me-3">Dashboard</a>
+    <a routerLink="/customer/products" class="me-3">Products</a>
+    <a routerLink="/customer/orders" class="me-3">Orders</a>
+
+    <!-- Cart Icon with Badge -->
+    <a routerLink="/customer/cart" class="position-relative">
+      <i class="bi bi-cart3 fs-4"></i>
+      <span class="cart-badge bg-danger position-absolute top-0 start-100 translate-middle"
+            *ngIf="cartItemCount$ | async as count">
+        {{ count }}
+      </span>
+    </a>
+  </nav>
 </header>

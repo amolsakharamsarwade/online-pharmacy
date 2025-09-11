@@ -1,1 +1,42 @@
-<p>cart-summary works!</p>
+<div class="container mt-4">
+  <h2>Your Cart</h2>
+
+  <!-- unwrap once -->
+  <div *ngIf="(cartItems$ | async) as cartItems; else emptyCart">
+    <div *ngIf="cartItems.length > 0; else emptyCart">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- use the unwrapped cartItems -->
+        <tr *ngFor="let item of cartItems">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.price | currency }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product.price * item.quantity | currency }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeItem(item.product.id)">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="cart-footer d-flex flex-wrap justify-content-between align-items-center mt-3">
+        <button class="btn btn-warning" (click)="clearCart()">Clear Cart</button>
+        <h4 class="m-0">Total: {{ getTotal(cartItems) | currency }}</h4>
+        <a routerLink="/customer/checkout" class="btn btn-primary mt-2 mt-md-0">Proceed to Checkout</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty-cart">Your cart is empty.</p>
+  </ng-template>
+</div>

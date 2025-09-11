@@ -9,7 +9,8 @@ import {CartComponent} from './pages/cart/cart.component';
 import {OrderHistoryComponent} from './pages/orders/order-history/order-history.component';
 import {CartSummaryComponent} from './components/cart-summary/cart-summary.component';
 import {SharedModule} from "../shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -19,13 +20,15 @@ import {FormsModule} from "@angular/forms";
     ProductDetailComponent,
     CartComponent,
     OrderHistoryComponent,
-    CartSummaryComponent
+    CartSummaryComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerModule {

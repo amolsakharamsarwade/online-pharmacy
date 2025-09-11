@@ -65,6 +65,10 @@
 
 `ng g component customer/components/cart-summary`
 
+`ng g component customer/components/checkout`
+
+`ng g component customer/components/order-history`
+
 ## 7️⃣ Create Admin Module & Components
 
 `ng g module admin --routing`

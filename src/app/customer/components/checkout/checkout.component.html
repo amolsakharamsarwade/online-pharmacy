@@ -1,0 +1,50 @@
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Full Name</label>
+      <input type="text" formControlName="fullName" />
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+    </div>
+
+    <div>
+      <label>Address</label>
+      <input type="text" formControlName="address" />
+    </div>
+
+    <div>
+      <label>City</label>
+      <input type="text" formControlName="city" />
+    </div>
+
+    <div>
+      <label>ZIP</label>
+      <input type="text" formControlName="zip" />
+    </div>
+
+    <div>
+      <label>Phone</label>
+      <input type="text" formControlName="phone" />
+    </div>
+
+    <div>
+      <label>Payment Method</label>
+      <select formControlName="paymentMethod">
+        <option value="">Select...</option>
+        <option value="credit">Credit Card</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="checkoutForm.invalid">Place Order</button>
+  </form>
+
+  <p>
+    <a routerLink="/customer/cart">← Back to Cart</a>
+  </p>
+</div>

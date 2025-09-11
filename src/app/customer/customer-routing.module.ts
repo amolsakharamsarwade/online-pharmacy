@@ -3,9 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {ProductListComponent} from "./pages/product-list/product-list.component";
 import {ProductDetailComponent} from "./pages/product-detail/product-detail.component";
-import {CartComponent} from "./pages/cart/cart.component";
 import {OrderHistoryComponent} from "./pages/orders/order-history/order-history.component";
 import {AuthGuard} from "../auth/guards/auth.guard";
+import {CartSummaryComponent} from "./components/cart-summary/cart-summary.component";
+import {CheckoutComponent} from "./components/checkout/checkout.component";
 
 const routes: Routes = [{
   path: '',
@@ -22,7 +23,7 @@ const routes: Routes = [{
   component: ProductDetailComponent,
   canActivate: [AuthGuard],
   data: {role: 'customer'}
-}, {
+}/*, {
   path: 'cart',
   component: CartComponent,
   canActivate: [AuthGuard],
@@ -32,7 +33,24 @@ const routes: Routes = [{
   component: OrderHistoryComponent,
   canActivate: [AuthGuard],
   data: {role: 'customer'}
-}];
+}*/, {
+  path: 'cart',
+  component: CartSummaryComponent,
+  canActivate: [AuthGuard],
+  data: { role: 'customer' }
+},
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'customer' }
+  },
+  {
+    path: 'orders',
+    component: OrderHistoryComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'customer' }
+  }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
