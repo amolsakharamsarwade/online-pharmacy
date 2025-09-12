@@ -1,1 +1,87 @@
-<p>product-form works!</p>
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+    <!-- Name -->
+    <mat-form-field class="full-width">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+        Product Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- SKU -->
+    <mat-form-field class="full-width">
+      <mat-label>SKU</mat-label>
+      <input matInput formControlName="sku" />
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <!-- Category -->
+    <mat-form-field class="full-width">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category" />
+    </mat-form-field>
+
+    <!-- Price -->
+    <mat-form-field class="full-width">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price" />
+      <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+        Price is required
+      </mat-error>
+      <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+        Price must be greater than 0
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Stock -->
+    <mat-form-field class="full-width">
+      <mat-label>Stock</mat-label>
+      <input matInput type="number" formControlName="stock" />
+      <mat-error *ngIf="productForm.get('stock')?.hasError('required')">
+        Stock is required
+      </mat-error>
+      <mat-error *ngIf="productForm.get('stock')?.hasError('min')">
+        Stock cannot be negative
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Image URL -->
+    <mat-form-field class="full-width">
+      <mat-label>Image URL</mat-label>
+      <input matInput formControlName="imageUrl" (input)="updateImagePreview()" />
+    </mat-form-field>
+
+    <!-- Image Upload -->
+    <div class="image-upload">
+      <label for="fileInput">Upload Image:</label>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+
+    <!-- Image Preview -->
+    <div *ngIf="imagePreview" class="image-preview">
+      <p>Image Preview:</p>
+      <img [src]="imagePreview" alt="Product Image" />
+    </div>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" type="submit">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

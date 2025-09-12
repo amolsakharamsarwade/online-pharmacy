@@ -6,6 +6,7 @@ import {ProductFormComponent} from "./pages/manage-products/product-form/product
 import {OrderListComponent} from "./pages/manage-orders/order-list/order-list.component";
 import {CustomerListComponent} from "./pages/manage-customers/customer-list/customer-list.component";
 import {AuthGuard} from "../auth/guards/auth.guard";
+import {OrderFormComponent} from "./pages/manage-orders/order-form/order-form.component";
 
 const routes: Routes = [{
   path: '',
@@ -23,11 +24,21 @@ const routes: Routes = [{
   canActivate: [AuthGuard],
   data: {role: 'admin'}
 }, {
+  path: 'products/edit/:id',
+  component: ProductFormComponent,
+  canActivate: [AuthGuard],
+  data: { role: 'admin' }
+}, {
   path: 'orders',
   component: OrderListComponent,
   canActivate: [AuthGuard],
   data: {role: 'admin'}
 }, {
+  path: 'orders/edit/:id',  // <-- ADD THIS ROUTE
+  component: OrderFormComponent,
+  canActivate: [AuthGuard],
+  data: { role: 'admin' }
+},{
   path: 'customers',
   component: CustomerListComponent,
   canActivate: [AuthGuard],

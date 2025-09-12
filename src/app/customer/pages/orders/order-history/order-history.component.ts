@@ -13,7 +13,7 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.getOrdersStream().subscribe(data => {
+    this.orderService.orders$.subscribe(data => {
       this.orders = data;
     });
   }

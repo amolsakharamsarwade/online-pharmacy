@@ -1,0 +1,31 @@
+.container {
+  padding: 20px;
+  max-width: 600px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.buttons {
+  margin-top: 15px;
+}
+
+.image-preview {
+  margin: 15px 0;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 150px;
+  border: 1px solid #ccc;
+}
+
+.image-upload {
+  margin: 15px 0;
+}
+
+.image-upload input[type="file"] {
+  display: block;
+  margin-top: 5px;
+}
