@@ -11,10 +11,12 @@ import { OrderStatusComponent } from './components/order-status/order-status.com
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSelectModule} from "@angular/material/select";
 import { OrderFormComponent } from './pages/manage-orders/order-form/order-form.component';
+import { CustomerFormComponent } from './pages/manage-customers/customer-form/customer-form.component';
+import {NgChartsModule} from "ng2-charts";
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { OrderFormComponent } from './pages/manage-orders/order-form/order-form.
     OrderListComponent,
     CustomerListComponent,
     OrderStatusComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    CustomerFormComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,9 @@ import { OrderFormComponent } from './pages/manage-orders/order-form/order-form.
     MatInputModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    NgChartsModule
   ]
 })
 export class AdminModule { }

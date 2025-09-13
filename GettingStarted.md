@@ -95,6 +95,14 @@
 
 `ng g service shared/services/order`
 
+`ng g interface shared/models/customer --type=model`
+
+`ng g service shared/services/customer`,
+
+`ng g c admin/pages/manage-customers/customer-list`
+
+`npm install chart.js@^4.4.0 ng2-charts@4.1.1`
+
 ## 9️⃣ Run the App
 
 `ng serve`

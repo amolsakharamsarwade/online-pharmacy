@@ -53,6 +53,7 @@ export class OrderFormComponent implements OnInit {
 
     // 4️⃣ Populate items
     this.order.items.forEach(item => {
+      console.log('item:', item);
       this.items.push(
         this.fb.group({
           id: [item.id],

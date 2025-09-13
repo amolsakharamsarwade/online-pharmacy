@@ -1,1 +1,66 @@
-<p>customer-list works!</p>
+<div class="container">
+  <h2>Customer Management</h2>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="addCustomer()">+ Add Customer</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <mat-form-field class="full-width">
+      <mat-label>Search Customers</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Type to search by name, email, phone, address" />
+    </mat-form-field>
+  </div>
+
+  <!-- Customers Table -->
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width-table">
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.id }} </td>
+    </ng-container>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.name }} </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.email }} </td>
+    </ng-container>
+
+    <!-- Phone -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.phone }} </td>
+    </ng-container>
+
+    <!-- Address -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.address }} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let customer">
+        <button mat-button color="primary" (click)="editCustomer(customer)">Edit</button>
+        <button mat-button color="warn" (click)="deleteCustomer(customer.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <!-- Table rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

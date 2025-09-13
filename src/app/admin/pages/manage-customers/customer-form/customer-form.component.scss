@@ -37,15 +37,6 @@
   gap: 20px;                 /* spacing between fields */
 }
 
-/* Order items rows */
-.item-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 16px;                 /* space between fields */
-  align-items: center;
-  margin-bottom: 16px;
-}
-
 /* Full width utility */
 .full-width {
   width: 100%;
@@ -68,10 +59,6 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .customer-section {
-    grid-template-columns: 1fr;
-  }
-
-  .item-row {
     grid-template-columns: 1fr;
   }
 

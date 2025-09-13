@@ -7,6 +7,7 @@ import {OrderListComponent} from "./pages/manage-orders/order-list/order-list.co
 import {CustomerListComponent} from "./pages/manage-customers/customer-list/customer-list.component";
 import {AuthGuard} from "../auth/guards/auth.guard";
 import {OrderFormComponent} from "./pages/manage-orders/order-form/order-form.component";
+import {CustomerFormComponent} from "./pages/manage-customers/customer-form/customer-form.component";
 
 const routes: Routes = [{
   path: '',
@@ -27,7 +28,7 @@ const routes: Routes = [{
   path: 'products/edit/:id',
   component: ProductFormComponent,
   canActivate: [AuthGuard],
-  data: { role: 'admin' }
+  data: {role: 'admin'}
 }, {
   path: 'orders',
   component: OrderListComponent,
@@ -37,13 +38,24 @@ const routes: Routes = [{
   path: 'orders/edit/:id',  // <-- ADD THIS ROUTE
   component: OrderFormComponent,
   canActivate: [AuthGuard],
-  data: { role: 'admin' }
-},{
+  data: {role: 'admin'}
+}, {
   path: 'customers',
   component: CustomerListComponent,
   canActivate: [AuthGuard],
   data: {role: 'admin'}
-}];
+}, {
+  path: 'customers/new',
+  component: CustomerFormComponent,
+  canActivate: [AuthGuard],
+  data: {role: 'admin'}
+}, {
+  path: 'customers/edit/:id',
+  component: CustomerFormComponent,
+  canActivate: [AuthGuard],
+  data: {role: 'admin'}
+},
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

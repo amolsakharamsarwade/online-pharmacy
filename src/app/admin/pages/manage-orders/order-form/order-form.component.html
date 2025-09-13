@@ -1,54 +1,82 @@
-<!-- Customer Info -->
-<div formGroupName="customer" class="form-section">
-  <h3>Customer Info</h3>
-  <mat-form-field class="full-width">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" [disabled]="true" />
-  </mat-form-field>
+<div class="container">
+  <form class="order-form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
 
-  <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" [disabled]="true" type="email" />
-  </mat-form-field>
+    <!-- Customer Section -->
+    <div class="form-section">
+      <h3>Customer Information</h3>
+      <div formGroupName="customer" class="customer-section">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Items Section -->
+    <div class="form-section">
+      <h3>Order Items</h3>
+      <div formArrayName="items">
+        <div
+          class="item-row"
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field appearance="fill">
+            <mat-label>Item Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Quantity</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="quantity"
+              (input)="updateTotal()"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Section -->
+    <div class="form-section total-section">
+      <h3>Total</h3>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Total</mat-label>
+        <input matInput formControlName="total" readonly />
+      </mat-form-field>
+    </div>
+
+    <!-- Status Section -->
+    <div class="form-section status-section">
+      <h3>Status</h3>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">
+        Save Order
+      </button>
+      <button mat-button type="button" (click)="router.navigate(['/admin/orders'])">
+        Cancel
+      </button>
+    </div>
+  </form>
 </div>
-
-<!-- Order Items -->
-<div formArrayName="items" class="form-section">
-  <h3>Items</h3>
-  <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="item-row">
-    <mat-form-field>
-      <mat-label>Product</mat-label>
-      <input matInput formControlName="name" [disabled]="true" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Price</mat-label>
-      <input matInput formControlName="price" type="number" [disabled]="true" />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Quantity</mat-label>
-      <input matInput formControlName="quantity" type="number" (change)="updateTotal()" />
-    </mat-form-field>
-  </div>
-</div>
-
-<!-- Total & Status -->
-<div class="form-section">
-  <mat-form-field>
-    <mat-label>Total</mat-label>
-    <input matInput formControlName="total" [disabled]="true" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Status</mat-label>
-    <mat-select formControlName="status">
-      <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<button mat-raised-button color="primary" type="submit">Update Order</button>
-<button mat-raised-button color="warn" type="button" (click)="router.navigate(['/admin/orders'])">
-  Cancel
-</button>

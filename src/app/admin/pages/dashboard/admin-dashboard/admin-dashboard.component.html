@@ -1,1 +1,81 @@
-<p>admin-dashboard works!</p>
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Summary cards -->
+  <div class="summary-grid">
+    <div class="card">
+      <h3>Total Sales</h3>
+      <p>{{ totalSales | currency:'USD' }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p>{{ totalOrders }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Customers</h3>
+      <p>{{ customerCount }}</p>
+    </div>
+  </div>
+
+  <!-- Charts section -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>Sales Trend</h3>
+      <canvas baseChart
+              [data]="salesChartData"
+              [options]="chartOptions"
+              [type]="'line'">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>Orders by Payment Method</h3>
+      <canvas baseChart
+              [data]="paymentChartData"
+              [options]="chartOptions"
+              [type]="'pie'">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Low Stock Chart + Top Products -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>Low Stock Items</h3>
+      <canvas baseChart
+              [data]="lowStockChartData"
+              [options]="chartOptions"
+              [type]="'bar'">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>Orders by Delivery Status</h3>
+      <canvas baseChart
+              [data]="deliveryStatusChartData"
+              [options]="chartOptions"
+              [type]="'pie'">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>Top-Selling Products</h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Product</th>
+          <th>Sales</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of topProducts">
+          <td>{{ p.name }}</td>
+          <td>{{ p.sales }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
